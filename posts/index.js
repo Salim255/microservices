@@ -14,6 +14,8 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+const posts = {};
+
 app.get("/posts", (req, res) => {
   res.send(posts);
 });
@@ -35,11 +37,16 @@ app.post("/posts", async (req, res) => {
       title,
     },
   });
+
   //201 for created resource
   res.status(201).send(posts[id]);
 });
 
-const posts = {};
+app.post("/events", (req, res) => {
+  console.log("Received event", req.body.type);
+
+  res.send({});
+});
 
 app.listen(4000, () => {
   console.log("====================================");
