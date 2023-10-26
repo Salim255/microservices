@@ -52,5 +52,5 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(4002, () => {
-  console.log("Running on port 4002");
+  console.log("Service query running on port: 4002");
 });
