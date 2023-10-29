@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-dep
+
+spec:
+  #To specify how this deployment should behave
+  replicas: 1
+  #Replicas is the number of pods we want to create
+  selector:
+    #Selector to tell the deployment to find all the different pod been created with the labels app:posts
+    matchLabels:
+      app: posts
+  template:
+    #Template is where we specify the exact configuration of a pod that we want the deployment  to create
+    metadata:
+      labels:
+        app: posts
+    spec:
+      containers:
+        - name: posts
+          image: crawan/posts:5
