@@ -7,4 +7,4 @@ metadata:
 spec:
   containers:
     - name: posts
-      image: crawan/posts:0.0.1
+      image: crawan/posts:5
