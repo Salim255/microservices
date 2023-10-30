@@ -9,7 +9,7 @@ spec:
     app: posts
   ports:
     # Here we list out all the different ports we want to expose in the pod
-    - name: Posts
+    - name: posts
       # The name here just for login purposes
       protocol: TCP
       port: 4000
