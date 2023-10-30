@@ -20,3 +20,23 @@ spec:
       containers:
         - name: posts
           image: crawan/posts:latest
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-clusterip-srv
+spec:
+  ##type: NodePort
+  selector:
+    # posts , refer to the pod that we create in deployment, so we telling this service to find all the differnt pods with the label (posts) and expose this pods to the outside world
+    app: posts
+  ports:
+    # Here we list out all the different ports we want to expose in the pod
+    - name: posts
+      # The name here just for login purposes
+      protocol: TCP
+      port: 4000
+      # Represent Node service port
+      targetPort: 4000
+      # Represent pod port
