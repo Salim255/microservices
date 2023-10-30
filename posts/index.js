@@ -49,7 +49,7 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(4000, () => {
-  console.log("====================================");
+  console.log("====================================", "V5");
   console.log("Service posts running on port: 4000");
   console.log("====================================");
 });

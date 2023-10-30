@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-dep
+  name: posts-depl
 
 spec:
   #To specify how this deployment should behave
@@ -19,4 +19,4 @@ spec:
     spec:
       containers:
         - name: posts
-          image: crawan/posts:5
+          image: crawan/posts:latest
