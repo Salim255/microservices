@@ -18,13 +18,14 @@ app.post("/events", (req, res) => {
   axios.post("http://post-clusterip-srv:4000/events", event).catch((err) => {
     console.log(err.message);
   });
-  /*   axios.post("http://localhost:4001/events", event).catch((err) => {
+  axios.post("http://comment-clusterip-srv:4001/events", event).catch((err) => {
     console.log(err.message);
   });
-  axios.post("http://localhost:4002/events", event).catch((err) => {
+  /*  axios.post("http://localhost:4002/events", event).catch((err) => {
     console.log(err.message, "here");
   });
   res.send({ status: "OK" }); */
+  res.send({ status: "OK" });
 });
 
 app.listen(4005, () => {
