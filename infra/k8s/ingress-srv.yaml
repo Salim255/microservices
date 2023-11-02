@@ -5,6 +5,9 @@ metadata:
   #This entire annotation section is what's going to help the ingress controller understand that we are trying to feed it some routing rules, so the ingress controller going to scan continuously all the different objects or all the different config files. So we are throwing into our cluster and it's going to try to find one that has this exact annotation
   annotations:
     kubernetes.io/ingress.class: nginx
+
+    ##We need to add this to use regular expressions
+    nginx.ingress.kubernetes.io/use-regex: "true"
     #ingressclass.kubernetes.io/is-default-class: "true"
 
 spec:
@@ -15,7 +18,8 @@ spec:
       #Ingress engine assuming that we might be hosting many different apps at different domains. So that's what this host property here all about
       http:
         paths:
-          - path: "/posts"
+          #To create a post
+          - path: "/posts/create"
             pathType: Prefix
             backend:
               #The service of posts
@@ -24,3 +28,36 @@ spec:
                 #The port of posts service
                 port:
                   number: 4000
+
+          #To get posts
+          - path: "/posts"
+            pathType: Prefix
+            backend:
+              #The service of posts
+              service:
+                name: query-srv
+                #The port of posts service
+                port:
+                  number: 4002
+
+          #As nginx not support route like post/1/, so we need to write in regular expression
+          #To create a comment
+          - path: "/posts/?(.*)/comments"
+            pathType: Prefix
+            backend:
+              #The service of comments
+              service:
+                name: comments-srv
+                #The port of comments service
+                port:
+                  number: 4001
+
+          #This type of path should always be the last, otherwise all our traffic end in this path
+          #React service section
+          #- path: /?(.*)
+          # pathType: Prefix
+          #backend:
+          # service:
+          #  name: client-srv
+          #port:
+          # number: 3000
